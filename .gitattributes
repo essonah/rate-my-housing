@@ -1,1 +1,14 @@
 ECHO is on.
+# Ensure all text files use LF for line endings in the repository
+* text=auto
+
+# Ensure specific text files use LF
+*.txt text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+
+# Treat specific files as binary and do not modify line endings
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
