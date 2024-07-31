@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import FAQ from './faq';
 import About from './About';
 import Navbar from './navbar';
+import ReviewsPage from './ReviewsPage';
 
 function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
   const [dorms, setDorms] = useState([]);
-  const [selectedDorm, setSelectedDorm] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:5050/api/dorms')
@@ -25,6 +26,21 @@ function Home() {
       })
       .catch((error) => console.error('Error fetching dorms:', error));
   }, []);
+
+  const fetchSuggestions = (query) => {
+    fetch(`http://localhost:5050/api/dorms/search?q=${query}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Search suggestions:', data); // Debugging line
+        setSuggestions(data);
+      })
+      .catch((error) => console.error('Error fetching suggestions:', error));
+  };
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -49,6 +65,25 @@ function Home() {
     navigate('/rate');
   };
 
+  const handleInputChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    if (query.length > 1) {
+      fetchSuggestions(query);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion.name);
+    setSuggestions([]);
+    navigate(`/dorm/${suggestion._id}`, { state: { dorm: suggestion } });
+  };
+
+  const handleExplore= () =>{
+    navigate('/reviews');
+  }
   return (
     <div className="home">
       <Navbar />
@@ -60,9 +95,22 @@ function Home() {
               type="text"
               placeholder="Search for housing..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleInputChange}
+              onBlur={() => setTimeout(() => setSuggestions([]), 100)} // Hides suggestions when input loses focus
             />
             <button type="submit">Search</button>
+            {suggestions.length > 0 && (
+              <ul className="suggestions">
+                {suggestions.map((suggestion) => (
+                  <li
+                    key={suggestion._id}
+                    onMouseDown={() => handleSuggestionClick(suggestion)}
+                  >
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </form>
         </div>
         <img
@@ -85,7 +133,7 @@ function Home() {
             <p>Sign up, Rate your dorm, and leave feedback to help others</p>
             <section className="call-to-action">
               <button onClick={handleRate}>Rate Your Dorm</button>
-              <button>Explore Reviews</button>
+              <button onClick={handleExplore}>Explore Reviews</button>
             </section>
           </div>
         </div>
