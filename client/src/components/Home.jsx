@@ -5,12 +5,27 @@ import FAQ from './faq';
 import About from './About';
 import Navbar from './navbar';
 import ReviewsPage from './ReviewsPage';
+import Testimonials from './Testimonials';
 
 function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [dorms, setDorms] = useState([]);
+  const [testimonials, setTestimonials] = useState([
+    {
+      text: "Thanks to this platform I found the best housing suited for my needs.",
+      author: "Amanda Adjei"
+    },
+    {
+      text: "I love the location of this dorm. It's so close to all my classes.",
+      author: "Akosua Aidoo"
+    },
+    {
+      text: "The facilities are top-notch and the staff are always helpful.",
+      author: "Kwame Agyemang"
+    }
+  ]);
 
   useEffect(() => {
     fetch('http://localhost:5050/api/dorms')
@@ -81,12 +96,14 @@ function Home() {
     navigate(`/dorm/${suggestion._id}`, { state: { dorm: suggestion } });
   };
 
-  const handleExplore= () =>{
+  const handleExplore = () => {
     navigate('/reviews');
-  }
+  };
+
   return (
     <div className="home">
       <Navbar />
+  
       <section className="hero">
         <div className="hero-content">
           <h1>Find Your Perfect Home At Mount Holyoke College</h1>
@@ -149,12 +166,9 @@ function Home() {
       </section> */}
       <section className="user-testimonials">
         <h2>What Students Say</h2>
-        <div className="testimonials">
-          {/* Add testimonials here */}
-        </div>
+        <Testimonials testimonials={testimonials} />
       </section>
       <section className="map-view">
-        <h2>Explore Housing Locations</h2>
         <div id="map">
           {/* Integrate Google Maps or another map service */}
         </div>

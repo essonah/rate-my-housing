@@ -6,6 +6,9 @@ import Navbar from './components/navbar';
 import DormModal from './components/DormModal';
 import ReviewsPage from './components/ReviewsPage';
 import FAQ from './components/faq';
+import Login from './components/Login';
+import Signin from './components/Sign';
+import { RouteMatcher } from 'next/dist/server/future/route-matchers/route-matcher';
 
 function App() {
   return (
@@ -19,6 +22,8 @@ function App() {
             <Route path="/dorm/:id" element={<DormModal />} />
            <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signin" element={<Signin />} />
           </Routes>
         </BrowserRouter>
       </header>
