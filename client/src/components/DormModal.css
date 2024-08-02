@@ -1,0 +1,49 @@
+.modal-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.modal-page h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal-page p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-page img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modal-page h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.modal-page ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.modal-page ul li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.modal-page p.location {
+  font-size: 16px;
+  margin-top: 10px;
+}

@@ -1,0 +1,176 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+  
+.home {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+  
+.hero {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
+  
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+  
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+  
+#housing-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+  
+.search-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+  
+.search-filters input,
+.search-filters select {
+    padding: 10px;
+    font-size: 1rem;
+    margin: 0 10px;
+}
+  
+.introduction, .top-rated, .recent-reviews, .call-to-action, .user-testimonials, .map-view, .faq {
+    margin-bottom: 40px;
+}
+  
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.how-it-works {
+    padding: 20x;
+    background-color: #f9f9f9;
+}
+
+.how-it-works .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust spacing between items */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.how-it-works img {
+    max-width: 70%; /* Reduce width slightly to create more space */
+    height: auto;
+    margin-right: 30px; /* Increase margin to push text further right */
+    margin-left: 70px; /* Move image further to the left */
+    border-radius: 10px;
+}
+
+.how-it-works .text {
+    max-width: 90%; /* Increase width slightly to take more space */
+    padding-left: 10px; /* Add padding to move text further right */
+}
+
+.how-it-works h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.how-it-works p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+}
+  
+.call-to-action {
+    display: flex;
+    justify-content: center;
+}
+  
+.call-to-action button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+  
+.call-to-action button:hover {
+    background-color: #0056b3;
+}
+  
+.user-testimonials .testimonials {
+    display: flex;
+    justify-content: center;
+}
+  
+.faq .faq-item {
+    margin-bottom: 20px;
+}
+  
+.faq .faq-item h3 {
+    font-size: 1.2rem;
+}
+  
+.faq .faq-item p {
+    font-size: 1rem;
+}
+.search-filters {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .suggestions {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    position: absolute;
+    width: calc(100% - 22px); /* Adjusted to fit the width of the input */
+    z-index: 1000;
+    margin-top: 2px; /* Space between the input and suggestions */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    list-style: none;
+    color: #000; /* Ensure text color is visible */
+  }
+  
+  .suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+
+  .footer{
+    background-color: #6fa2d4;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
