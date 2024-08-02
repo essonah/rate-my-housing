@@ -63,17 +63,18 @@ router.post('/reviews/submit', async (req, res) => {
   }
 });
   // Get reviews for a specific dorm
-  // Get reviews for a specific dorm
-router.get('/reviews/dorm/:dormId', async (req, res) => {
-  try {
-    const { dormId } = req.params;
-    const reviews = await Review.find({ dorm: dormId }).populate('dorm', 'name');
-    res.json(reviews);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
+  router.get('/reviews/dorm/:dormId', async (req, res) => {
+    try {
+      const { dormId } = req.params;
+      const reviews = await Review.find({ dorm: dormId }).populate('dorm', 'name');
+      console.log('Fetched reviews:', reviews); // Log fetched reviews
+      res.json(reviews);
+    } catch (error) {
+      console.error('Error fetching reviews:', error); // Log error
+      res.status(500).json({ message: error.message });
+    }
+  });
+  
 // Get all reviews
 router.get('/reviews', async (req, res) => {
   try {
@@ -83,6 +84,5 @@ router.get('/reviews', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 
 export default router;

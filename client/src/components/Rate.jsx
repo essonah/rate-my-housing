@@ -12,6 +12,23 @@ function Rate() {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' or 'error'
 
+  const [attributes, setAttributes] = useState({
+    location: 3,
+    commonAreas: 3,
+    proximityDining: 3,
+    studySpace: 3,
+    roomSize: 3,
+    wifi: 3,
+    bathroomLocation: 3,
+    proximityAthletics: 3,
+    bathroomQuality: 3,
+    supportAvailability: 3,
+    furnitureQuality: 3,
+    funFriendly: 3,
+    amenitiesAge: 3,
+    quietStudious: 3
+  });
+
   useEffect(() => {
     const fetchDorms = async () => {
       try {
@@ -26,12 +43,18 @@ function Rate() {
     fetchDorms();
   }, []);
 
+  const handleAttributeChange = (e) => {
+    const { name, value } = e.target;
+    setAttributes({ ...attributes, [name]: Number(value) });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reviewData = {
       dorm: selectedDorm,
       rating,
       review,
+      attributes
     };
     console.log('Submitting review:', reviewData); // Log the data being submitted
     try {
@@ -43,6 +66,22 @@ function Rate() {
       setSelectedDorm('');
       setRating(0);
       setReview('');
+      setAttributes({
+        location: 3,
+        commonAreas: 3,
+        proximityDining: 3,
+        studySpace: 3,
+        roomSize: 3,
+        wifi: 3,
+        bathroomLocation: 3,
+        proximityAthletics: 3,
+        bathroomQuality: 3,
+        supportAvailability: 3,
+        furnitureQuality: 3,
+        funFriendly: 3,
+        amenitiesAge: 3,
+        quietStudious: 3
+      });
     } catch (error) {
       console.error('Error submitting review:', error); // Log the error
       setMessage('Failed to submit review');
@@ -76,7 +115,7 @@ function Rate() {
           </select>
         </label>
 
-        <label htmlFor="rating">Rating
+        <label htmlFor="rating">Overall Rating
           <ReactRating
             initialRating={rating}
             onChange={(rate) => setRating(rate)}
@@ -97,6 +136,26 @@ function Rate() {
           />
         </label>
 
+        <div className="attribute-ratings">
+          {Object.keys(attributes).map(attr => (
+            <div key={attr} className="attribute-rating">
+              <label>{attr.split(/(?=[A-Z])/).join(' ')} {/* Split camelCase to words */}
+                <div className="rating-options">
+                  <input
+                    type="range"
+                    name={attr}
+                    min="1"
+                    max="5"
+                    value={attributes[attr]}
+                    onChange={handleAttributeChange}
+                  />
+                  <span>{attributes[attr]}</span>
+                </div>
+              </label>
+            </div>
+          ))}
+        </div>
+        
         <button type="submit">Submit</button>
       </form>
     </div>

@@ -167,3 +167,10 @@ p {
   .suggestions li:hover {
     background-color: #f0f0f0;
   }
+
+  .footer{
+    background-color: #6fa2d4;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }

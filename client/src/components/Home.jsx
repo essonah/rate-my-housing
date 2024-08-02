@@ -176,7 +176,12 @@ function Home() {
       <section className="faq">
         <FAQ />
       </section>
+      <footer className='footer'>
+        <h1>Rate My Housing</h1>
+        <p>&copy; 2024 Rate_mY_HouSing</p>
+      </footer>
     </div>
+  
   );
 }
 

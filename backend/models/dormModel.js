@@ -6,6 +6,7 @@ const dormSchema = new mongoose.Schema({
     amenities: [String],
     location: String,
     imageUrl: String
+    
 });
 
 const Dorm = mongoose.model('Dorm', dormSchema);
