@@ -1,0 +1,78 @@
+/* ReviewDorm.css */
+
+.review-dorm-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.review-dorm-container h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.review-dorm-container p {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.review-dorm-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.review-dorm-container a:hover {
+    text-decoration: underline;
+}
+
+.review-dorm-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-dorm-container label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.review-dorm-container input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.review-dorm-container img {
+    margin-top: 20px;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+.review-dorm-container button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.review-dorm-container button:hover {
+    background-color: #0056b3;
+}

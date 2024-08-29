@@ -6,6 +6,8 @@ import Navbar from './components/navbar';
 import DormModal from './components/DormModal';
 import ReviewsPage from './components/ReviewsPage';
 import FAQ from './components/faq';
+import ReviewDorm from './components/ReviewDorm';
+import Login from './components/Login';
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
             <Route path="/dorm/:id" element={<DormModal />} />
            <Route path="/reviews" element={<ReviewsPage />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/reviewdorm" element={<ReviewDorm />} />
+            <Route path="/login" element={<Login />} />
         
           </Routes>
         </BrowserRouter>
