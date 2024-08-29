@@ -53,6 +53,15 @@ body {
     margin: 0 10px;
 }
   
+#search-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
 .introduction, .top-rated, .recent-reviews, .call-to-action, .user-testimonials, .map-view, .faq {
     margin-bottom: 40px;
 }
@@ -128,7 +137,6 @@ p {
     display: flex;
     justify-content: center;
 }
-  
 .faq .faq-item {
     margin-bottom: 20px;
 }

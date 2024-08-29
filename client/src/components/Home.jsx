@@ -115,7 +115,7 @@ function Home() {
               onChange={handleInputChange}
               onBlur={() => setTimeout(() => setSuggestions([]), 100)} // Hides suggestions when input loses focus
             />
-            <button type="submit">Search</button>
+            <button id="search-btn" type="submit">Search</button>
             {suggestions.length > 0 && (
               <ul className="suggestions">
                 {suggestions.map((suggestion) => (
