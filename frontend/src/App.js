@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Rate from './components/Rate';
 import Navbar from './components/navbar';
@@ -14,7 +14,7 @@ function App() {
       <header className="App-header">
         <BrowserRouter basename="/rate-my-housing">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<div>Home Page</div>} />
             <Route path="/rate" element={<Rate />} />
             <Route path="/navbar" element={<Navbar />} />
             <Route path="/dorm/:id" element={<DormModal />} />
@@ -22,7 +22,7 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/reviewdorm" element={<ReviewDorm />} />
             <Route path="/login" element={<Login />} />
-            {/* Fallback for undefined paths */}
+            {/* Catch-all route */}
             <Route path="*" element={<div>404 - Page Not Found</div>} />
           </Routes>
         </BrowserRouter>
