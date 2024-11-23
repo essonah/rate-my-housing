@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import FAQ from './faq';
 import About from './About';
 import Navbar from './navbar';
-import ReviewsPage from './ReviewsPage';
+//import ReviewsPage from './ReviewsPage';
 import Testimonials from './Testimonials';
 
 function Home() {
