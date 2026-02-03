@@ -7,6 +7,22 @@ const reviewSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   review: { type: String, required: true },
   date: { type: Date, default: Date.now },
+  attributes: {
+    location: Number,
+    commonAreas: Number,
+    proximityDining: Number,
+    studySpace: Number,
+    roomSize: Number,
+    wifi: Number,
+    bathroomLocation: Number,
+    proximityAthletics: Number,
+    bathroomQuality: Number,
+    supportAvailability: Number,
+    furnitureQuality: Number,
+    funFriendly: Number,
+    amenitiesAge: Number,
+    quietStudious: Number
+  }
 });
 
 const Review = mongoose.model('Review', reviewSchema);

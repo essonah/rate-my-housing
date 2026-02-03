@@ -1,49 +1,127 @@
-.modal-page {
+.hero-rate {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  background: white;
+  color: #004d44;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hero-rate:hover {
+  opacity: 0.95;
+}
+
+.facts-chips {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.facts-chip {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 260px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  display: flex;
   align-items: center;
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  justify-content: center;
+  color: #666;
+  margin-top: 20px;
 }
 
-.modal-page h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
+.facts-section {
+  margin-top: 20px;
 }
 
-.modal-page p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.modal-page img {
-  max-width: 200px;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.modal-page h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.modal-page ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.modal-page ul li {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.modal-page p.location {
-  font-size: 16px;
+.facts-grid {
   margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.fact-key {
+  font-weight: 700;
+  color: #111827;
+}
+
+.fact-value {
+  color: #333;
+  font-weight: 600;
+}
+
+.small-muted {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.category-summary {
+  margin-top: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.category-summary h4 {
+  margin: 0 0 10px;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 0.95rem;
+}
+
+.category-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.category-value {
+  font-weight: 800;
+  color: #111827;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.mini-tag {
+  background: #f0f2f5;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
