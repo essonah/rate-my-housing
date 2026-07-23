@@ -25,11 +25,38 @@
 
 .about-image {
     flex: 1;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.about-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+.about-art {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--brand-light);
+    border: 1px solid var(--brand-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-art-icon {
+    font-size: 5rem;
+    color: var(--brand);
+}
+
+@media (max-width: 700px) {
+    .about {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .about-image {
+        justify-content: center;
+    }
 }

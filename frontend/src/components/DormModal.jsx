@@ -14,7 +14,7 @@ function DormModal() {
   useEffect(() => {
     const fetchDorm = async () => {
       try {
-        const res = await axios.get(`http://localhost:5050/api/dorm/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/dorms/${id}`);
         setDorm(res.data);
       } catch (err) {
         console.error("Error fetching dorm:", err);
@@ -23,7 +23,7 @@ function DormModal() {
 
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:5050/api/reviews/dorm/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/reviews/dorm/${id}`);
         setReviews(res.data);
       } catch (err) {
         console.error("Error fetching reviews:", err);
@@ -34,7 +34,13 @@ function DormModal() {
     if (id) fetchReviews();
   }, [id]);
 
-  if (!dorm) return <p>Loading...</p>;
+  if (!dorm) {
+    return (
+      <p className="dorm-loading" role="status" aria-live="polite">
+        Loading dorm details…
+      </p>
+    );
+  }
 
   // ⭐ average overall rating
   const avgRating =
@@ -66,7 +72,7 @@ function DormModal() {
     <div className="full-page-container">
       {/* Hero */}
       <section className="hero-section">
-        <div className="hero-content">
+        <div className="dorm-hero-content">
           <h1>{dorm.name}</h1>
           <p className="location-text">
             Mount Holyoke College • {dorm.location || "South Hadley"}
@@ -100,7 +106,13 @@ function DormModal() {
             <h3>About the Dorm</h3>
             <p>{dorm.description || "No description available yet."}</p>
 
-            {dorm.imageUrl ? (
+            {dorm.images?.length > 0 ? (
+              <div className="photo-gallery">
+                {dorm.images.map((url, index) => (
+                  <img key={index} src={url} alt={`${dorm.name} ${index + 1}`} className="gallery-image" />
+                ))}
+              </div>
+            ) : dorm.imageUrl ? (
               <img src={dorm.imageUrl} alt={dorm.name} className="featured-image" />
             ) : (
               <div className="image-placeholder">
@@ -196,9 +208,9 @@ function DormModal() {
           </div>
 
           {reviews.length > 0 ? (
-            <div className="reviews-list">
+            <div className="dorm-reviews-list">
               {reviews.map((review) => (
-                <div key={review._id} className="review-item">
+                <div key={review._id} className="dorm-review-item">
                   <div className="review-meta">
                     <span className="stars">
                       {"⭐".repeat(review.rating)}

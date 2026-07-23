@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import './FAQ.css';
 
-const FAQItem = ({ question, answer }) => {
+const FAQItem = ({ question, answer, index }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const answerId = `faq-answer-${index}`;
 
   return (
     <div className="faq-item">
-      <button
-        className="faq-question"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span>{question}</span>
-        <span>{isOpen ? '-' : '+'}</span>
-      </button>
+      <h3 className="faq-question-heading">
+        <button
+          type="button"
+          className="faq-question"
+          aria-expanded={isOpen}
+          aria-controls={answerId}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>{question}</span>
+          <span aria-hidden="true">{isOpen ? '−' : '+'}</span>
+        </button>
+      </h3>
       {isOpen && (
-        <div className="faq-answer">
+        <div className="faq-answer" id={answerId}>
           <p>{answer}</p>
         </div>
       )}
@@ -44,26 +50,19 @@ const FAQ = () => {
       question: "Can I report inappropriate reviews?",
       answer: "Yes, if you come across a review that you believe is inappropriate or violates our guidelines, you can report it by clicking on the 'Report' button next to the review."
     },
-    {
-      question: "How can I contact the landlord?",
-      answer: "If the housing listing provides contact information, you can reach out to the landlord directly. If not, you can send a message through our platform if the landlord has enabled this feature."
-    },
-  
+
     {
       question: "Are all reviews verified?",
       answer: "We strive to ensure the authenticity of reviews. Our team regularly reviews submitted content, and we encourage users to report any suspicious or false reviews."
     },
-    {
-      question: "How can I improve my housing rating?",
-      answer: "If you are a landlord, maintaining a clean, well-maintained property and responding promptly to tenant concerns can help improve your rating. Encouraging satisfied tenants to leave positive reviews can also be beneficial."
-    },
+  
   ];
 
   return (
     <div className="faq">
       <h2>Frequently Asked Questions</h2>
       {faqData.map((faq, index) => (
-        <FAQItem key={index} question={faq.question} answer={faq.answer} />
+        <FAQItem key={index} index={index} question={faq.question} answer={faq.answer} />
       ))}
     </div>
   );
