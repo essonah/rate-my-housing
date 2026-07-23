@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,19 +11,17 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const token = await userCredential.user.getIdToken();
-            localStorage.setItem('token', token);
-            localStorage.setItem('username', userCredential.user.email);
-            console.log("Login Successfully");
-            window.location.href = "/home";
-            toast.success("User logged in Successfully", {
+            await signInWithEmailAndPassword(auth, email, password);
+            toast.success("Logged in successfully", {
                 position: "top-center",
             });
+            navigate(location.state?.from?.pathname || "/", { replace: true });
         } catch (error) {
             console.log(error);
             toast.error(error.message, {
@@ -39,17 +37,13 @@ function Login() {
                     <h1>Log In</h1>
                     <p>Welcome to MOUNT HOLYOKE COLLEGE's Rate My Housing Page</p>
                     <p>Log in to rate your dorms and see what others have to say</p>
-                    <label htmlFor='login-name'>
-                        Name:
-                        <input type='text' id='login-name' />
-                    </label>
                     <label htmlFor='login-email'>
                         Email:
-                        <input type='email' id='login-email' onChange={(e) => setEmail(e.target.value)} placeholder='Enter email' />
+                        <input type='email' id='login-email' onChange={(e) => setEmail(e.target.value)} placeholder='Enter email' required />
                     </label>
                     <label htmlFor='login-password'>
                         Password:
-                        <input type="password" id='login-password' onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" id='login-password' onChange={(e) => setPassword(e.target.value)} required />
                     </label>
                     <button type='submit'>Log In</button><br />
                     <p>No Account? <Link to='/signup'>Sign Up</Link></p>

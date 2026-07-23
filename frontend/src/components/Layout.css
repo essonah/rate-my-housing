@@ -1,0 +1,27 @@
+.site-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1;
+}
+
+.skip-link {
+    position: absolute;
+    top: -48px;
+    left: 8px;
+    z-index: 1000;
+    background: var(--brand);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}

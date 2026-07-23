@@ -1,0 +1,41 @@
+.not-found {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.not-found-code {
+    margin: 0;
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--brand);
+    line-height: 1;
+}
+
+.not-found h1 {
+    margin: 10px 0;
+    font-size: 1.6rem;
+    color: var(--ink);
+}
+
+.not-found p {
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.not-found-link {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 22px;
+    background: var(--brand);
+    color: white;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+}
+
+.not-found-link:hover {
+    background: var(--brand-dark);
+}
