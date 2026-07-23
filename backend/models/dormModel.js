@@ -6,8 +6,10 @@ const dormSchema = new mongoose.Schema({
     amenities: [String],
     rating: Number,
     location: String,
-    imageUrl: String
-    
+    imageUrl: String,
+    images: [String],
+    facts: mongoose.Schema.Types.Mixed
+
 });
 
 const Dorm = mongoose.model('Dorm', dormSchema);
