@@ -12,23 +12,9 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [dorms, setDorms] = useState([]);
-  const [testimonials, setTestimonials] = useState([
-    {
-      text: "Thanks to this platform I found the best housing suited for my needs.",
-      author: "Amanda Adjei"
-    },
-    {
-      text: "I love the location of this dorm. It's so close to all my classes.",
-      author: "Akosua Aidoo"
-    },
-    {
-      text: "The facilities are top-notch and the staff are always helpful.",
-      author: "Kwame Agyemang"
-    }
-  ]);
-
+ 
   useEffect(() => {
-    fetch('http://localhost:5050/api/dorms')
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/dorms`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -43,7 +29,7 @@ function Home() {
   }, []);
 
   const fetchSuggestions = (query) => {
-    fetch(`http://localhost:5050/api/dorms/search?q=${query}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/dorms/search?q=${query}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -59,7 +45,7 @@ function Home() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:5050/api/dorms/search?q=${searchQuery}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/dorms/search?q=${searchQuery}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -153,24 +139,6 @@ function Home() {
               <button onClick={handleExplore}>Explore Reviews</button>
             </section>
           </div>
-        </div>
-      </section>
-      {/* <section className="top-rated">
-       {dorms.map((dorm) => (
-          <div key={dorm._id} className="dorm">
-            <h3>{dorm.name}</h3>
-            <p>{dorm.description}</p>
-            <img src={dorm.imageUrl} alt={dorm.name} />
-          </div>
-        ))}
-      </section> */}
-      <section className="user-testimonials">
-        <h2>What Students Say</h2>
-        <Testimonials testimonials={testimonials} />
-      </section>
-      <section className="map-view">
-        <div id="map">
-          {/* Integrate Google Maps or another map service */}
         </div>
       </section>
       <section className="faq">
