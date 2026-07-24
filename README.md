@@ -106,4 +106,4 @@ Routes marked "required" expect a Firebase ID token in the `Authorization: Beare
 ## Deployment
 
 - **Backend**: containerized via `backend/Dockerfile` (`node:22-alpine`, exposes port `5050`).
-- **Frontend**: `npm run deploy` in `frontend/` builds and publishes to GitHub Pages via `gh-pages`.
+- **Frontend**: deployed on vercel
