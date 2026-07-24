@@ -8,7 +8,11 @@ import { connectMongo } from './db/connection.js';
 const PORT = process.env.PORT || 5050;
 const app = express();
 
-app.use(cors());
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
+  : true; // no FRONTEND_URL set (e.g. local dev) — allow any origin
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use(morgan('dev'));
 

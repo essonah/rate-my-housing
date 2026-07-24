@@ -12,6 +12,19 @@
   font-size: 1.05rem;
 }
 
+.dorm-error {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  text-align: center;
+  color: var(--ink);
+  font-size: 1.05rem;
+}
+
+.dorm-error p {
+  margin: 0 0 20px;
+}
+
 .hero-section {
   background: linear-gradient(135deg, var(--brand), var(--brand-dark));
   color: white;
@@ -234,6 +247,115 @@
   object-fit: cover;
   border-radius: 10px;
   flex-shrink: 0;
+  display: block;
+}
+
+.gallery-image-btn,
+.featured-image-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: zoom-in;
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.gallery-image-btn:focus-visible,
+.featured-image-btn:focus-visible {
+  outline: var(--focus-ring, 2px solid #2563eb);
+  outline-offset: 2px;
+}
+
+.featured-image-btn {
+  width: 100%;
+}
+
+.featured-image-btn .featured-image {
+  cursor: zoom-in;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.lightbox-image {
+  max-width: min(90vw, 1000px);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-prev {
+  left: 16px;
+}
+
+.lightbox-next {
+  right: 16px;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+@media (max-width: 600px) {
+  .lightbox-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
 }
 
 .facts-section {

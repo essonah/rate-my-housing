@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:16-alpine
+FROM node:22-alpine
 
 # Set the working directory in the container
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port the backend service runs on
-EXPOSE 5000
+EXPOSE 5050
 
 # Define the command to run the backend
 CMD ["npm", "start"]

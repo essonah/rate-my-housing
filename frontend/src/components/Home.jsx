@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Home.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaTimes, FaUsers } from 'react-icons/fa';
 import FAQ from './faq';
 import About from './About';
+
+function truncate(text, maxLength) {
+  if (!text || text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength).trimEnd()}…`;
+}
 
 function Home() {
   const navigate = useNavigate();
@@ -11,11 +16,11 @@ function Home() {
   const [suggestions, setSuggestions] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [noResults, setNoResults] = useState(false);
-  const [dorms, setDorms] = useState([]);
+  const [recentReviews, setRecentReviews] = useState([]);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/dorms`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/reviews`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -23,9 +28,10 @@ function Home() {
         return response.json();
       })
       .then((data) => {
-        setDorms(data);
+        const sorted = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
+        setRecentReviews(sorted.slice(0, 3));
       })
-      .catch((error) => console.error('Error fetching dorms:', error));
+      .catch((error) => console.error('Error fetching recent reviews:', error));
   }, []);
 
   const fetchSuggestions = (query) => {
@@ -71,7 +77,6 @@ function Home() {
         return response.json();
       })
       .then((data) => {
-        setDorms(data);
         if (data.length > 0) {
           navigate(`/dorm/${data[0]._id}`, { state: { dorm: data[0] } });
         } else {
@@ -224,7 +229,42 @@ function Home() {
           <About embedded />
         </section>
       </div>
-      <section className="recent-reviews"></section>
+      {recentReviews.length > 0 && (
+        <section className="recent-reviews">
+          <h2>Recent Reviews</h2>
+          <div className="recent-reviews-grid">
+            {recentReviews.map((review) => {
+              const rating = review.rating || 0;
+              return (
+                <Link
+                  key={review._id}
+                  to={review.dorm?._id ? `/dorm/${review.dorm._id}` : '/reviews'}
+                  className="recent-review-card"
+                >
+                  <div className="recent-review-top">
+                    <span className="recent-review-dorm">
+                      {review.dorm?.name || 'Unknown Dorm'}
+                    </span>
+                    <span className="recent-review-stars" aria-hidden="true">
+                      {'★'.repeat(rating)}
+                      {'☆'.repeat(Math.max(0, 5 - rating))}
+                    </span>
+                  </div>
+                  {review.review && (
+                    <p className="recent-review-snippet">{truncate(review.review, 120)}</p>
+                  )}
+                  <span className="recent-review-date">
+                    {review.date ? new Date(review.date).toLocaleDateString() : 'Recently'}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="recent-reviews-footer">
+            <Link to="/reviews" className="recent-reviews-link">See all reviews →</Link>
+          </div>
+        </section>
+      )}
       <section className="how-it-works">
         <div className="container">
           <div className="how-it-works-art" aria-hidden="true">

@@ -10,14 +10,40 @@ function DormModal() {
 
   const [dorm, setDorm] = useState(state?.dorm || null);
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(!state?.dorm);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const galleryImages = dorm?.images?.length > 0 ? dorm.images : dorm?.imageUrl ? [dorm.imageUrl] : [];
+
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setLightboxIndex(null);
+      } else if (event.key === "ArrowRight") {
+        setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
+      } else if (event.key === "ArrowLeft") {
+        setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxIndex, galleryImages.length]);
 
   useEffect(() => {
     const fetchDorm = async () => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/dorms/${id}`);
         setDorm(res.data);
+        setError(null);
       } catch (err) {
         console.error("Error fetching dorm:", err);
+        setError("We couldn't load this dorm right now. Please try again.");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -32,13 +58,25 @@ function DormModal() {
 
     if (!dorm && id) fetchDorm();
     if (id) fetchReviews();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (!dorm) {
+  if (loading) {
     return (
       <p className="dorm-loading" role="status" aria-live="polite">
         Loading dorm details…
       </p>
+    );
+  }
+
+  if (error || !dorm) {
+    return (
+      <div className="dorm-error" role="alert">
+        <p>{error || "We couldn't find that dorm."}</p>
+        <button className="rate-button" onClick={() => navigate("/")}>
+          Back to home
+        </button>
+      </div>
     );
   }
 
@@ -109,11 +147,26 @@ function DormModal() {
             {dorm.images?.length > 0 ? (
               <div className="photo-gallery">
                 {dorm.images.map((url, index) => (
-                  <img key={index} src={url} alt={`${dorm.name} ${index + 1}`} className="gallery-image" />
+                  <button
+                    key={index}
+                    type="button"
+                    className="gallery-image-btn"
+                    onClick={() => setLightboxIndex(index)}
+                    aria-label={`View ${dorm.name} photo ${index + 1} of ${dorm.images.length} full size`}
+                  >
+                    <img src={url} alt={`${dorm.name} ${index + 1}`} className="gallery-image" />
+                  </button>
                 ))}
               </div>
             ) : dorm.imageUrl ? (
-              <img src={dorm.imageUrl} alt={dorm.name} className="featured-image" />
+              <button
+                type="button"
+                className="featured-image-btn"
+                onClick={() => setLightboxIndex(0)}
+                aria-label={`View ${dorm.name} photo full size`}
+              >
+                <img src={dorm.imageUrl} alt={dorm.name} className="featured-image" />
+              </button>
             ) : (
               <div className="image-placeholder">
                 No dorm image uploaded yet
@@ -216,7 +269,7 @@ function DormModal() {
                       {"⭐".repeat(review.rating)}
                     </span>
                     <span className="date">
-                      {new Date(review.createdAt || Date.now()).toLocaleDateString()}
+                      {new Date(review.date || Date.now()).toLocaleDateString()}
                     </span>
                   </div>
 
@@ -238,6 +291,66 @@ function DormModal() {
           )}
         </section>
       </div>
+
+      {lightboxIndex !== null && galleryImages[lightboxIndex] && (
+        <div
+          className="lightbox-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${dorm.name} photo ${lightboxIndex + 1} of ${galleryImages.length}`}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            type="button"
+            className="lightbox-close"
+            aria-label="Close photo"
+            onClick={() => setLightboxIndex(null)}
+          >
+            ×
+          </button>
+
+          {galleryImages.length > 1 && (
+            <button
+              type="button"
+              className="lightbox-nav lightbox-prev"
+              aria-label="Previous photo"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+              }}
+            >
+              ‹
+            </button>
+          )}
+
+          <img
+            src={galleryImages[lightboxIndex]}
+            alt={`${dorm.name} ${lightboxIndex + 1}`}
+            className="lightbox-image"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          {galleryImages.length > 1 && (
+            <button
+              type="button"
+              className="lightbox-nav lightbox-next"
+              aria-label="Next photo"
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxIndex((prev) => (prev + 1) % galleryImages.length);
+              }}
+            >
+              ›
+            </button>
+          )}
+
+          {galleryImages.length > 1 && (
+            <p className="lightbox-counter">
+              {lightboxIndex + 1} / {galleryImages.length}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }
